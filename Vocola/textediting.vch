@@ -1,0 +1,113 @@
+# Movement commands
+Next line = {End}{End}{Enter};
+
+<spellingcharacters> := 
+	( alpha=a | bravo=b | charlie=c | delta=d | echo=e | foxtrot=f
+	| golf=g | hotel=h | india=i | juliett=j | kilo=k | lima=l
+	| mike=m | november=n | oscar=o | papa=p | quebec=q | romeo=r
+	| sierra=s | tango=t | uniform=u | victor=v | whiskey=w
+	| xray=x | yankee=y | zulu=z
+	| Cap alpha=A | Cap bravo=B | Cap charlie=C | Cap delta=D 
+	| Cap echo=E | Cap foxtrot=F | Cap golf=G | Cap hotel=H 
+	| Cap india=I | Cap juliett=J | Cap kilo=K | Cap lima=L 
+	| Cap mike=M | Cap november=N | Cap oscar=O | Cap papa=P 
+	| Cap quebec=Q | Cap romeo=R | Cap sierra=S | Cap tango=T 
+	| Cap uniform=U | Cap victor=V | Cap whiskey=W
+	| Cap xray=X | Cap yankee=Y | Cap zulu=Z
+	| A=a | B=b | C=c | D=d | E=e | F=f | G=g | H=h | I=i | J=j | K=k | L=l 
+	| M=m | N=n | O=o | P=p | Q=q | R=r | S=s | T=t | U=u | V=v | W=w | X=x 
+	| Y=y | Z=z
+	| cap A=A | cap B=B | cap C=C | cap D=D | cap E=E 
+	| cap F=F | cap G=G | cap H=H | cap I=I | cap J=J 
+	| cap K=K | cap L=L | cap M=M | cap N=N | cap O=O 
+	| cap P=P | cap Q=Q | cap R=R | cap S=S | cap T=T 
+	| cap U=U | cap V=V | cap W=W | cap X=X | cap Y=Y | cap Z=Z
+	| 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
+	| "!" | "@" | "#" | "$" | "%" | "^" | "&" | "*" | "(" | ")" | "`" 
+	| "~" | "-" | "_" | "=" | "+" | "\" | "|" | "[" | "{" | "]" | "}" 
+	| ";" | ":" | "'" | '"' | "," | "<" | "." | ">" | "/" | "?"
+	# Aliases
+	| dot="." | percent="%" | vertical="|" | vertical pipe="|" | dollar="$"
+	| hash="#" | pound="#" | sharp="#" | octothorp="#"
+	| less than="<" | greater than=">" | left angle="<" | right angle=">"
+	| equals="="
+	);
+	
+<special> := 
+	( Left | Right | Up | Down | space=" " | tab-key=Tab | Enter
+	| page-up=PgUp | page-down=PgDn | Backspace | delete=Del
+	| escape=Esc | Home | End
+	);
+
+<key> := 
+	( alpha=a | bravo=b | charlie=c | delta=d | echo=e | foxtrot=f
+	| golf=g | hotel=h | india=i | juliett=j | kilo=k | lima=l
+	| mike=m | november=n | oscar=o | papa=p | quebec=q | romeo=r
+	| sierra=s | tango=t | uniform=u | victor=v | whiskey=w
+	| xray=x | yankee=y | zulu=z
+	| Cap alpha=A | Cap bravo=B | Cap charlie=C | Cap delta=D 
+	| Cap echo=E | Cap foxtrot=F | Cap golf=G | Cap hotel=H 
+	| Cap india=I | Cap juliett=J | Cap kilo=K | Cap lima=L 
+	| Cap mike=M | Cap november=N | Cap oscar=O | Cap papa=P 
+	| Cap quebec=Q | Cap romeo=R | Cap sierra=S | Cap tango=T 
+	| Cap uniform=U | Cap victor=V | Cap whiskey=W
+	| Cap xray=X | Cap yankee=Y | Cap zulu=Z
+	| A=a | B=b | C=c | D=d | E=e | F=f | G=g | H=h | I=i | J=j | K=k | L=l 
+	| M=m | N=n | O=o | P=p | Q=q | R=r | S=s | T=t | U=u | V=v | W=w | X=x 
+	| Y=y | Z=z
+	| cap A=A | cap B=B | cap C=C | cap D=D | cap E=E 
+	| cap F=F | cap G=G | cap H=H | cap I=I | cap J=J 
+	| cap K=K | cap L=L | cap M=M | cap N=N | cap O=O 
+	| cap P=P | cap Q=Q | cap R=R | cap S=S | cap T=T 
+	| cap U=U | cap V=V | cap W=W | cap X=X | cap Y=Y | cap Z=Z
+	| 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
+	| "!" | "@" | "#" | "$" | "%" | "^" | "&" | "*" | "(" | ")" | "`" 
+	| "~" | "-" | "_" | "=" | "+" | "\" | "|" | "[" | "{" | "]" | "}" 
+	| ";" | ":" | "'" | '"' | "," | "<" | "." | ">" | "/" | "?"
+	| Left | Right | Up | Down | space=" " | tab-key=Tab | Enter
+	| page-up=PgUp | page-down=PgDn | Backspace | delete=Del
+	| Escape=Esc | Home | End
+	# Aliases
+	| dot="." | percent="%" | vertical="|" | vertical pipe="|" | dollar="$"
+	| hash="#" | pound="#" | sharp="#" | octothorp="#"
+	| less than="<" | greater than=">" | left angle="<" | right angle=">"
+	| equals="="
+	);
+
+<modifier> := Shift | control=Ctrl | Alt | Win;
+<nn> := 1..99;
+
+<key> = {$1};
+<special> <nn> = {$1_$2};
+[Press] <modifier> <key> <nn> = {$1+$2_$3};
+[Press] <modifier> <modifier> <key> <nn> = {$1+$2+$3_$4};
+[Press] <modifier> <modifier> <modifier> <key> <nn> = {$1+$2+$3+$4_$5};
+
+#<spellingcharacters> = $1;		 
+#<spellingcharacters> <spellingcharacters> = $1$2;
+#<spellingcharacters> <spellingcharacters> <spellingcharacters> = $1$2$3;
+<spellingcharacters> [<spellingcharacters> [<spellingcharacters> [<spellingcharacters> [<spellingcharacters>]]]] = $1$2$3$4$5;
+Fat <spellingcharacters> = " " $1 " ";
+
+# Spelling
+Silly <spellingcharacters> [<spellingcharacters> [<spellingcharacters> [<spellingcharacters> [<spellingcharacters>]]]] = $1$2$3$4$5;
+
+# for delimiters
+parentheses = "()"{Left};
+left paren = "(";
+right paren = ")";
+[square] brackets = "[]"{Left};
+[curly] braces = "{}"{Left};
+Angle brackets = "<>"{Left};
+[double] quotes = """"""{Left};
+single quotes = "''"{Left};
+octothorps = "##"{Left};
+backticks = "``"{Left};
+
+# Turn words into variables
+# To edit, open file C:\NatLink\NatLink\Vocola\extensions\vocola_ext_bv.py
+# When editing this, say "Load [Voice] Extensions" to reload
+Underscore case <_anything> = BV.to_underscore_case($1);
+Camel case <_anything> = BV.to_camel_case($1);
+
+

@@ -1,0 +1,5 @@
+# Edit menu commands
+
+Find something = {Ctrl+f};
+Find next = {F3};
+Find previous = {Shift+F3};

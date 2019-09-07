@@ -1,0 +1,16 @@
+# General file commands
+save file = {Ctrl+s};
+save file as = {Ctrl+Shift+s};
+Save all files = {Ctrl+Alt+s};
+new file = {Ctrl+n};
+open file = {Ctrl+o};
+close file = {Ctrl+F4};
+new window = {Ctrl+Shift+n};
+next tab = {Ctrl+Tab};
+previous tab = {Ctrl+Shift+Tab};
+Quit application = {Ctrl+q};
+
+
+
+Toggle application = {Alt+Tab};
+
