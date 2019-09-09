@@ -8,6 +8,7 @@ Save all = {Ctrl+Alt+s};
 Close file = {Ctrl+w};
 Close all except current = {Ctrl+Shift+Alt+w};
 Close all files = {Ctrl+Shift+w};
+Recent projects = {Alt+f}{j};
 
 # Symbol commands
 Standalone comment = "# ";

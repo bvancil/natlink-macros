@@ -1,4 +1,4 @@
-# Global voice commands
+l# Global voice commands
 
 highway = {Alt+Tab};
 page down other = {Alt+Tab}{PgDown}{Alt+Tab};

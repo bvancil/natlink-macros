@@ -10,4 +10,8 @@ command palette = {Ctrl+Shift+p};
 include file.vch;
 
 # Syntax-specific vocabularies
-#include SQL.vch;
+include SQL.vch;
+
+# dbt
+Model reference = "{{ ref('') }}"{Left_5};
+Source reference = "{{ source('', '') }}"{Left_9};

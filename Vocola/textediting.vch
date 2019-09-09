@@ -107,7 +107,7 @@ backticks = "``"{Left};
 # Turn words into variables
 # To edit, open file C:\NatLink\NatLink\Vocola\extensions\vocola_ext_bv.py
 # When editing this, say "Load [Voice] Extensions" to reload
-Underscore case <_anything> = BV.to_underscore_case($1);
+Snake case <_anything> = BV.to_underscore_case($1);
 Camel case <_anything> = BV.to_camel_case($1);
 
 

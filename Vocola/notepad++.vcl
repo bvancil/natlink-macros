@@ -7,7 +7,10 @@ include file.vch;
 
 # General text editing
 include textediting.vch;
- 
+
+# Notepad++
+Close tab = {Ctrl+w};
+
 Standalone comment = "# ";
 End of line comment = "  # ";
 
