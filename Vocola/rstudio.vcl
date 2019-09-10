@@ -132,6 +132,9 @@ Move active cursor down = {Ctrl+Alt+Shift+Down};
 Diff files = {Ctrl+Alt+d};
 Commit = {Ctrl+Alt+m};
 
+# Session
+Terminate R = {Alt+s}{t};
+
 # Build
 (Compile PDF | Preview | Knit document) = {Ctrl+Shift+k};
 Install and restart = {Ctrl+Shift+b};

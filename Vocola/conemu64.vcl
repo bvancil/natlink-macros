@@ -2,3 +2,4 @@
 
 include textediting.vch;
 cd = "cd ";
+git = "git";

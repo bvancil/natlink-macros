@@ -15,7 +15,7 @@
 	| splines
 	| caret | N net=nnet | E 1071=e1071
 	| Test that=testthat | R unit=RUnit 
-	| developer tools=devtools | use this=usethis
+	| developer tools=devtools | remotes | use this=usethis
 	| RG doll=rgdal | SF=sf | raster | LA GP=laGP | SP=sp
 	| Map tools=maptools | Map data=mapdata
 	| GG pub or=ggpubr | choropleth R=choroplethr
@@ -119,7 +119,7 @@ Boolean <logical_operators> = $1;
 <binary_operator> := 
 	( Plus="+" | Minus="-" | Times="*" | Divided by="/"
 	| To the power="^" | Exponent="^" | Modulo="%%" | Integer division="%/%"
-	| In="%in%"
+	| In="%in%" | Matrix multiplication="%*%"
 	);
 <binary_operator> = $1;
 Fat <binary_operator> = " " $1 " ";
@@ -134,16 +134,23 @@ If = "if () {}" {Left} {Enter} {Home} {Up} {Right_4};
 Else = " else {}" {Left} {Enter};
 For loop = "for ( in ) {}" {Left} {Enter} {Home} {Up} {Right_5};
 
+# Symbols
 gets [the value] = {Alt+-};
 ([Insert] assignment [operator] | [(gets|is)] assigned) = {Alt+-};
+Is assigned to = " -> ";
+
+# Pipes
 pipe = " %>% ";
+Lazy pipe = " %...>% ";
 Assignment pipe = " %<>% ";
 Exposition pipe = " %$% ";
 T pipe = " %T>% ";
 # [Insert] pipe [operator] = {Ctrl+Shift+m};
 
+# devtools
+
 
 # Macros for specific projects
 Source [project] settings = "source('project_settings.R')" {Enter};
 
-Pac-Man load = "if (!require('pacman')) install.packages('pacman')" {Enter_2} "pacman::p_load(  # Load packages after installing, if necessary." {Enter_2} {Backspace} ")" {Up} {End};
+Pac-Man load = "if (!base::require('pacman')) utils::install.packages('pacman')" {Enter_2} "pacman::p_load(  # Load packages after installing, if necessary." {Enter_2} {Backspace} ")" {Up} {End};

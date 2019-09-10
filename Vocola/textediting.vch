@@ -27,10 +27,12 @@ Next line = {End}{End}{Enter};
 	| "~" | "-" | "_" | "=" | "+" | "\" | "|" | "[" | "{" | "]" | "}" 
 	| ";" | ":" | "'" | '"' | "," | "<" | "." | ">" | "/" | "?"
 	# Aliases
+	| Minus="-" | Hyphen="-"
 	| dot="." | percent="%" | vertical="|" | vertical pipe="|" | dollar="$"
 	| hash="#" | pound="#" | sharp="#" | octothorp="#"
 	| less than="<" | greater than=">" | left angle="<" | right angle=">"
 	| equals="="
+	| Proper ellipsis="…" | m dash="—" | n dash="–"
 	);
 	
 <special> := 
@@ -68,6 +70,7 @@ Next line = {End}{End}{Enter};
 	| page-up=PgUp | page-down=PgDn | Backspace | delete=Del
 	| Escape=Esc | Home | End
 	# Aliases
+	| Minus="-" | Hyphen="-"
 	| dot="." | percent="%" | vertical="|" | vertical pipe="|" | dollar="$"
 	| hash="#" | pound="#" | sharp="#" | octothorp="#"
 	| less than="<" | greater than=">" | left angle="<" | right angle=">"
@@ -103,6 +106,10 @@ Angle brackets = "<>"{Left};
 single quotes = "''"{Left};
 octothorps = "##"{Left};
 backticks = "``"{Left};
+
+# Combinations
+Ellipsis = "...";
+Double colon = "::";
 
 # Turn words into variables
 # To edit, open file C:\NatLink\NatLink\Vocola\extensions\vocola_ext_bv.py
