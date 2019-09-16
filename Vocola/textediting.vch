@@ -1,5 +1,8 @@
+# textediting
+<n> := 0..99;
+
 # Movement commands
-Next line = {End}{End}{Enter};
+New line below = {End}{End}{Enter};
 
 <spellingcharacters> := 
 	( alpha=a | bravo=b | charlie=c | delta=d | echo=e | foxtrot=f
@@ -117,4 +120,63 @@ Double colon = "::";
 Snake case <_anything> = BV.to_underscore_case($1);
 Camel case <_anything> = BV.to_camel_case($1);
 
+# ---------------------------------------------------------------------------
+# Text Editing
+
+<direction>  := Left | Right | Up | Down;
+<left_right> := Left | Right;
+<start_end> := (Start={Home} | End={End});
+
+### Characters
+<n> <direction>       = {$2_$1};
+Kill (Char | 1 | One) = {Del};
+Kill Back [1]         = {Backspace};
+Kill <n>              = {Del_$1};
+[Kill] Back <n>       = {Backspace_$1};
+
+## Words
+[One] Word <left_right>= {Ctrl+$1};
+<n> Words <left_right> = {Ctrl+$2_$1};
+Kill Word              = {Right_2}{Ctrl+Left}{Shift+Ctrl+Right}   {Del};
+Kill <n> Words         = {Right_2}{Ctrl+Left}{Shift+Ctrl+Right_$1}{Del};
+Kill Back Word         = {Left}{Ctrl+Right}{Shift+Ctrl+Left}   {Del};
+Kill Back <n> Words    = {Left}{Ctrl+Right}{Shift+Ctrl+Left_$1}{Del};
+
+### Lines
+Line <start_end>     = $1;
+New Line             = {Enter};
+Line Here            = {Enter}{Left};
+Copy Line            = {home}{Shift+Down}{Shift+Home}{Ctrl+c};
+Kill Line            = {home}{Shift+Down}{Shift+Home}{Del};
+Kill Back Line       = {home}{Shift+Up}  {Shift+Home}{Del};
+Kill <n> Lines       = {home}{Shift+Down_$1}{Shift+Home}{Del};
+Kill Back <n> Lines  = {home}{Shift+Up_$1}  {Shift+Home}{Del};
+Kill Here            = {Shift+End}{Del};
+Kill Back Here       = {Shift+Home}{Del};
+Duplicate Line       = {home}{Shift+Down}{Shift+Home}{Ctrl+c}{Home}{Ctrl+v};
+
+### Entire "Flow"   
+Flow Start           = {Ctrl+Home};
+Flow End             = {Ctrl+End};
+Select All           = {Ctrl+a};
+Copy All             = {Ctrl+a}{Ctrl+c};
+(Cut|Kill) All       = {Ctrl+a}{Ctrl+x};
+Kill Flow Here       = {Ctrl+Shift+End} {Ctrl+x};
+Kill Back Flow Here  = {Ctrl+Shift+Home}{Ctrl+x};
+Replace All          = {Ctrl+a}{Del}{Ctrl+v};
+                    
+### Selection         
+Kill That            = {Del};
+Cut That             = {Ctrl+x};
+Copy That            = {Ctrl+c};
+Paste That            = {Ctrl+v};
+Paste Here           = ButtonClick() {Ctrl+v};
+Duplicate That       = {Ctrl+c}{Left}{Ctrl+v};
+Keep That            = {Ctrl+c}{Ctrl+a}{Del}{Ctrl+v};
+
+### Miscellaneous
+Undo <n> = {Ctrl+z_$1};
+Camel [Case] That = HeardWord(\Cap,That) HeardWord(compound,that) {Ctrl+Left}
+                    {Shift+Right} HeardWord(\No-Caps,That){Ctrl+Right};
+(Cap | Up Case) <n> = {Shift+Right_$2} HeardWord(\All-Caps,That);
 
