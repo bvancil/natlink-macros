@@ -24,90 +24,177 @@
 	| shiny | shiny load test=shinyloadtest
 	| here | Pac-Man=pacman | Micro benchmark=microbenchmark
 	| base | stats | You till=util
+	| CE API=ceapi | SM viz.=smvis | CPPR=cppr
 	);
 Package <package> = "'" $1 "'";
 Prefix <package> = $1 "::";
 
+# R code to generate a starting point for commands:
+# gen <- function(packageName) { library('magrittr'); library('rlang'); library(packageName, character.only=TRUE); glue::glue('package:{packageName}') %>% ls() %>% {fun <- .; glue::glue('{fun}="{packageName}::{fun}"') } %>% paste0(collapse = '\n\t| ') %>% cat('\n') }; gen('purrr')
 <functions> :=
+	## Base R
 	# base
 	( function
 	| concatenate=c | list | vector | matrix
 	| library 
-	| If else=ifelse
-	| Is not applicable=is.na | Is null=is.null
-	| length | lengths | levels
-	| Sequence=seq
-	| print | dim | dimension=dim
+	| If else=base::ifelse
+	| Is not applicable=base::is.na | Is null=base::is.null
+	| length=base::length | lengths=base::lengths | levels=base::levels
+	| Sequence=base::seq
+	| print | dim=base::dim | dimension=base::dim
+	| sample=base::sample | mean=base::mean
+	| minimum=base::min | maximum=base::max
+	| Parallel minimum=base::min | Parallel maximum=base::max
+	| Unique=base::unique
 	# stats
-	| sample | sequence=seq | mean | median | Standard deviation=sd | Variance=var 
-	| Correlation=cor | Covariance=cov
-	| Linear model=lm | Generalized linear model=glm
-	| QQ plot=qqplot | Coefficients=coef
-	| NA omit=na.omit | predict | Principal components=prcomp
-	| minimum=min | maximum=max
+	| median=stats::median | Standard deviation=stats::sd
+	| Variance=stats::var 
+	| Correlation=stats::cor | Covariance=stats::cov
+	| Linear model=stats::lm | Generalized linear model=stats::glm
+	| QQ plot=stats::qqplot | Coefficients=stats::coef
+	| NA omit=stats::na.omit | predict=stats::predict | Principal components=stats::prcomp
 	# graphics
-	| plot | Histogram=hist
+	| plot=graphics::plot | Histogram=graphics::hist
 	# methods
 	
 	# utils
-	| citation | data | vignette | install packages=install.packages
-	| Installed packages=installed.packages | Structure=str | View
+	| citation=utils::citation | data=utils::data | vignette=utils::vignette | install packages=utils::install.packages
+	| Installed packages=utils::installed.packages | Structure=utils::str | View
 	# Introspection
 	| class | type of=typeof | Dump as input=dput
-	| head | summary | attributes | names | colnames | rownames
+	| head | summary | attributes | names | column names=colnames | row names=rownames
 	# Help
+	## Specific Packages
+	# devtools
 	# dplyr
-	| Add count=add_count | Add row=add_row | Add row names=add_rownames
-	| Add tally=add_tally | All equal=all_equal | All variables=all_vars
-	| Any variables=any_vars | Arrange all=arrange_all
-	| Arrange at=arrange_at | Arrange if=arrange_if
-	| Benchmark tables=bench_tbls | between | Bind rows=bind_rows
-	| Case when=case_when | coalesce | combine | Compare tables=compare_tbls
-	| Compare tables 2=compare_tbls2 | contains | counts
-	| Cumulative all=cumall | Cumulative any=cumany | Cumulative mean=cummean
-	| Cumulative distribution=cume_dist | Current variables=current_vars
-	| Data frame=data_frame | Dense rank=dense_rank | Descending=desc
-	| Dimension description=dim_desc | Ends with=ends_with
-	| select | filter | mutate | sample n=sample_n
-	| rename | rename at=rename_at | recode
-	| mutate all=mutate_all | mutate at=mutate_at
-	| group by=group_by | summarize=summarise | ungroup
-	| variables=vars | functions=funs
-	# tidyr
-	| complete | nesting | crossing | expand | Drop NA=drop_na | extract | fill
-	| Full sequence=full_seq | gather | nest | Replace NA=replace_na | separate
-	| Separate rows=separate_rows | spread | unite | unnest
-	| inner join=inner_join | left join=left_join | right join=right_join
-	| full join=full_join
+	| Add count=dplyr::add_count | Add row=dplyr::add_row
+	| Add row names=dplyr::add_rownames
+	| Add tally=dplyr::add_tally | All equal=dplyr::all_equal 
+	| All variables=dplyr::all_vars | Any variables=dplyr::any_vars
+	| Arrange=dplyr::arrange | Arrange all=dplyr::arrange_all
+	| Arrange at=dplyr::arrange_at | Arrange if=dplyr::arrange_if
+	| Benchmark tables=dplyr::bench_tbls | between=dplyr::between
+	| Bind rows=dplyr::bind_rows
+	| Case when=dplyr::case_when | coalesce=dplyr::coalesce
+	| combine=dplyr::combine | Compare tables=dplyr::compare_tbls
+	| Compare tables 2=dplyr::compare_tbls2 | contains=dplyr::contains
+	| count=dplyr::count
+	| Cumulative all=dplyr::cumall | Cumulative any=dplyr::cumany
+	| Cumulative mean=dplyr::cummean
+	| Cumulative distribution=dplyr::cume_dist
+	| Current variables=dplyr::current_vars
+	| Data frame=dplyr::data_frame | Dense rank=dplyr::dense_rank
+	| Descending=dplyr::desc
+	| Dimension description=dplyr::dim_desc
+	| Starts with=dplyr::starts_with
+	| Ends with=dplyr::ends_with
+	| Special if else=dplyr::if_else
+	| select=dplyr::select | filter=dplyr::filter
+	| mutate=dplyr::mutate | sample n=dplyr::sample_n
+	| rename=dplyr::rename | rename at=dplyr::rename_at
+	| recode=dplyr::recode
+	| mutate all=dplyr::mutate_all | mutate at=dplyr::mutate_at
+	| group by=dplyr::group_by | summarize=dplyr::summarise
+	| ungroup=dplyr::ungroup
+	| variables=dplyr::vars | functions=dplyr::funs
+	| inner join=dplyr::inner_join | left join=dplyr::left_join
+	| right join=dplyr::right_join
+	| full join=dplyr::full_join
 	# ggplot2
-	| Gigi plot=ggplot | AES=aes | geometry histogram=geom_histogram
-	| geometry point=geom_point | geometry line=geom_line 
-	| geometry simple feature=geom_sf | geometry smooth=geom_smooth
-	| geometry error bar=geom_errorbar 
-	| geometry horizontal error bar=geom_errorbarh
-	| facet wrap=facet_wrap
-	| Gigi title=ggtitle | labels=labs | x label=xlab | y label=ylab
-	# tibble
-	| tibble | tribble
-	# purrr
-	| map | Map string=map_str | Map double=map_dbl | Map integer=map_int
-	| Set names=set_names
-	# cdata
-	| Move values to rows=moveValuesToRows 
-	| Move values to columns=moveValuesToColumns
-	# sf
-	
-	# stringr
-	| String concatenate=str_c | String length=str_length
-	| String detect=str_detect | String split=str_split
-	| String replace=str_replace | String replace all=str_replace_all
-	| String replace NA=str_replace_na | String trim=str_trim
-	| String to lower=str_to_lower | String to upper=str_to_upper
-	| String to title=str_to_title
-	# readr
-	| Read CSV=read_csv | Write CSV=write_csv
+	| Gigi plot=ggplot2::ggplot | AES=ggplot2::aes
+	| geometry histogram=ggplot2::geom_histogram
+	| geometry point=ggplot2::geom_point
+	| geometry line=ggplot2::geom_line 
+	| geometry simple feature=ggplot2::geom_sf
+	| geometry smooth=ggplot2::geom_smooth
+	| geometry error bar=ggplot2::geom_errorbar 
+	| geometry horizontal error bar=ggplot2::geom_errorbarh
+	| facet wrap=ggplot2::facet_wrap
+	| Gigi title=ggplot2::ggtitle | labels=ggplot2::labs
+	| x label=ggplot2::xlab | y label=ggplot2::ylab
 	# here
 	| here=here::here
+	# plotly
+	# purrr
+	| compose="purrr::compose"
+	| discard="purrr::discard"
+	| done="purrr::done"
+	| every="purrr::every"
+	| exec="purrr::exec"
+	| imap="purrr::imap"
+	| imap_chr="purrr::imap_chr"
+	| imap_dbl="purrr::imap_dbl"
+	| imap_dfc="purrr::imap_dfc"
+	| imap_dfr="purrr::imap_dfr"
+	| imap_int="purrr::imap_int"
+	| imap_lgl="purrr::imap_lgl"
+	| imap_raw="purrr::imap_raw"
+	| imodify="purrr::imodify"
+	| iwalk="purrr::iwalk"
+	| keep="purrr::keep"
+	| lmap="purrr::lmap"
+	| lmap_at="purrr::lmap_at"
+	| lmap_if="purrr::lmap_if"
+	| map="purrr::map"
+	| map_at="purrr::map_at"
+	| map_call="purrr::map_call"
+	| map_chr="purrr::map_chr"
+	| map_dbl="purrr::map_dbl"
+	| map_depth="purrr::map_depth"
+	| map_df="purrr::map_df"
+	| map_dfc="purrr::map_dfc"
+	| map_dfr="purrr::map_dfr"
+	| map_if="purrr::map_if"
+	| map_int="purrr::map_int"
+	| map_lgl="purrr::map_lgl"
+	| map_raw="purrr::map_raw"
+	| map2="purrr::map2"
+	| map2_chr="purrr::map2_chr"
+	| map2_dbl="purrr::map2_dbl"
+	| map2_df="purrr::map2_df"
+	| map2_dfc="purrr::map2_dfc"
+	| map2_dfr="purrr::map2_dfr"
+	| map2_int="purrr::map2_int"
+	| map2_lgl="purrr::map2_lgl"
+	| map2_raw="purrr::map2_raw"
+	| partial="purrr::partial"
+	| pmap="purrr::pmap"
+	| pmap_chr="purrr::pmap_chr"
+	| pmap_dbl="purrr::pmap_dbl"
+	| pmap_df="purrr::pmap_df"
+	| pmap_dfc="purrr::pmap_dfc"
+	| pmap_dfr="purrr::pmap_dfr"
+	| pmap_int="purrr::pmap_int"
+	| pmap_lgl="purrr::pmap_lgl"
+	| pmap_raw="purrr::pmap_raw"
+	| prepend="purrr::prepend"
+	| pwalk="purrr::pwalk"
+	| reduce="purrr::reduce"
+	| reduce_right="purrr::reduce_right"
+	| reduce2="purrr::reduce2"
+	| reduce2_right="purrr::reduce2_right"
+	| rep_along="purrr::rep_along"
+	| transpose="purrr::transpose"
+	| walk="purrr::walk"
+	| walk2="purrr::walk2"
+	# readr
+	| Read CSV=read_csv | Write CSV=write_csv
+	# remotes
+	# rlang
+	| Set names=rlang::set_names
+	# stringr
+	| String concatenate=stringr::str_c | String length=stringr::str_length
+	| String detect=stringr::str_detect | String split=stringr::str_split
+	| String replace=stringr::str_replace | String replace all=stringr::str_replace_all
+	| String replace NA=stringr::str_replace_na | String trim=stringr::str_trim
+	| String to lower=stringr::str_to_lower | String to upper=stringr::str_to_upper
+	| String to title=stringr::str_to_title
+	# tibble
+	| tibble=tibble::tibble | tribble=tibble::tribble
+	# tidyr
+	| complete=tidyr::complete | nesting=tidyr::nesting | crossing=tidyr::crossing | expand=tidyr::expand | Drop NA=tidyr::drop_na | extract=tidyr::extract | fill=tidyr::fill
+	| Full sequence=tidyr::full_seq | gather=tidyr::gather | nest=tidyr::next | Replace NA=tidyr::replace_na | separate=tidyr::separate
+	| Separate rows=tidyr::separate_rows | spread=tidyr::spread | unite=tidyr::unite | unnest=tidyr::unnest
 	);
 	
 Function <functions> = $1 "()" {Left}; 
@@ -118,8 +205,9 @@ Logical <logical_operators> = $1;
 Boolean <logical_operators> = $1;
 <binary_operator> := 
 	( Plus="+" | Minus="-" | Times="*" | Divided by="/"
+	| Assign equals="=" | Compare equals="=="
 	| To the power="^" | Exponent="^" | Modulo="%%" | Integer division="%/%"
-	| In="%in%" | Matrix multiplication="%*%"
+	| In="%in%" | Matrix multiplication="%*%" | ~
 	);
 <binary_operator> = $1;
 Fat <binary_operator> = " " $1 " ";
@@ -147,10 +235,5 @@ Exposition pipe = " %$% ";
 T pipe = " %T>% ";
 # [Insert] pipe [operator] = {Ctrl+Shift+m};
 
-# devtools
-
-
 # Macros for specific projects
-Source [project] settings = "source('project_settings.R')" {Enter};
-
 Pac-Man load = "if (!base::require('pacman')) utils::install.packages('pacman')" {Enter_2} "pacman::p_load(  # Load packages after installing, if necessary." {Enter_2} {Backspace} ")" {Up} {End};
