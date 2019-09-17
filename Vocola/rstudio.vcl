@@ -141,7 +141,7 @@ Install and restart = {Ctrl+Shift+b};
 Load all = {Ctrl+Shift+l};
 Check package = {Ctrl+Shift+e};
 Test package = {Ctrl+Shift+t};
-Build document = {Ctrl+Shift+d};
+Build documentation = {Ctrl+Shift+d};
      
 
 # Help

@@ -9,7 +9,7 @@
 switchWindow() := SendSystemKeys( {Alt+Tab} );
 Switch Window = switchWindow();
 # Finicky apps that don't have good names?
-Switch to (Chrome=chrome) = AppBringUp($1);
+Switch to (Chrome=chrome.exe | Task manager=Taskmgr.exe | Slack=Slack.exe) = AppBringUp($1);
 (Close=c | Minimize=n | Maximize=x | Restore=r) Window = {Alt+Space}$1;
 Shunt Window <direction> = SendSystemKeys( {Win+$1} );
 Shunt Window <direction> <n> = SendSystemKeys( {Win+$1_$2} );

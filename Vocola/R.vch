@@ -4,13 +4,13 @@
 ## installed.packages()[, 'Package'] %>% sort %>% unique %>% str_c(collapse = ' | ')
 ### abind | acepack | acs | ade4 | animation | ape | aqp | arm | assertthat | backports | base | base64 | base64enc | bayesm | bayesplot | BH | bindr | bindrcpp | bitops | boa | boot | brew | broom | BRugs | car | caret | caTools | cellranger | censusr | checkmate | checkpoint | choroplethr | choroplethrMaps | chron | class | classInt | cluster | clv | coda | codetools | coefplot | colorRamps | colorspace | colourpicker | commonmark | compiler | countrycode | covr | cowplot | crayon | crosstalk | curl | data.table | datasets | DBI | dbplyr | deldir | deployrRserve | desc | devtools | dichromat | digest | dismo | doParallel | dplyr | DT | dygraphs | e1071 | ecodist | eigeninv | evaluate | expm | feather | filehash | FNN | fontBitstreamVera | fontLiberation | fontquiver | forcats | foreach | foreach | foreign | formatR | Formula | gapminder | gdata | gdtools | geoR | geoRglm | geosphere | GGally | ggmap | ggplot2 | ggplot2movies | ggpubr | ggrepel | ggsci | ggsignif | git2r | glmnet | glue | gmodels | gmp | goftest | graphics | grDevices | grid | gridBase | gridExtra | gstat | gtable | gtools | haven | here | hexbin | highr | Hmisc | hms | htmlTable | htmltools | htmlwidgets | httpuv | httr | idbr | igraph | inline | interplot | intervals | irlba | ISLR | iterators | iterators | jpeg | jsonlite | jsonlite | KernSmooth | kml | knitr | kutils | labeling | laGP | Lahman | lattice | latticeExtra | lavaan | lazyeval | lctools | LearnBayes | lme4 | longitudinalData | loo | lubridate | magic | magrittr | mapdata | mapproj | maps | maptools | maptree | margins | markdown | markovchain | MASS | MASS | matlab | Matrix | MatrixModels | matrixStats | mcmc | MCMCpack | memoise | methods | mgcv | mgcv | mice | microbenchmark | MicrosoftR | mime | miniUI | minqa | misc3d | mnormt | ModelMetrics | modelr | multcomp | multilevel | munsell | mvtnorm | ncf | ndtv | network | networkDynamic | nlme | nlme | nloptr | NMF | nnet | noncensus | numDeriv | nycflights13 | openssl | openxlsx | packrat | pacman | parallel | pbivnorm | pbkrtest | permute | pgirmess | pixmap | pkgconfig | pkgmaker | PKI | plogr | plotKML | plotly | plotrix | plyr | png | polyclip | praise | prediction | prettyunits | progress | proto | pryr | pscl | psych | purrr | quadprog | quantreg | R2OpenBUGS | R6 | R6 | RandomFields | RandomFieldsUtils | randomForest | randomNames | rappdirs | raster | RColorBrewer | Rcpp | RcppArmadillo | RcppEigen | RcppParallel | RCurl | readODS | readr | readstata13 | readxl | registry | rematch | reshape | reshape2 | RevoIOQ | RevoMods | RevoUtils | RevoUtilsMath | rex | rgdal | rgeos | rgl | RgoogleMaps | rio | rJava | rjson | RJSONIO | rlang | rmarkdown | rngtools | rockchalk | RODBC | roxygen2 | rpart | rpart | RPostgreSQL | rprojroot | RSAGA | RSclient | rsconnect | Rserve | rstan | rstanarm | rstantools | rstudioapi | RUnit | rvest | sandwich | scales | selectr | sf | shapefiles | shiny | shinyjs | shinystan | shinythemes | sna | sourcetools | sp | spacetime | SparseM | spatial | SpatialPack | spatstat | spatstat.utils | spBayes | spdep | splancs | splines | srvyr | StanHeaders | statnet.common | stats | stats4 | stringdist | stringi | stringr | survey | survival | svglite | tcltk | tensor | testit | testthat | tgp | TH.data | threejs | tibble | tidyr | tidyselect | tidyverse | tigris | tikzDevice | tint | tools | translations | triebeard | tufte | udunits2 | units | urltools | UScensus2010 | useful | utils | uuid | vdiffr | vegan | viridis | viridisLite | WDI | webshot | weights | whisker | withr | wrapr | xlsx | xlsxjars | XML | xml2 | xtable | xts | yaml | zip | zoo
 <package> :=
-	( GG plot 2=ggplot2 | G galley=GGally
+	( GG plot 2=ggplot2 | G galley=GGally | glue
 	| plot Lee=plotly
 	| Tidyverse=tidyverse | D plier=dplyr | Tidier=tidyr
 	| Reader=readr | tibble | lubridate | feather | Read XL=readxl
 	| purr=purrr
 	| C data=cdata
-	| glue | Stringer=stringr | My greeter=magrittr
+	| Stringer=stringr | My greeter=magrittr
 	| viridis | Wrapper=wrapr 
 	| splines
 	| caret | N net=nnet | E 1071=e1071
@@ -21,7 +21,9 @@
 	| GG pub or=ggpubr | choropleth R=choroplethr
 	| MASS | mice | String distance=stringdist
 	| ISLR | Rock chalk=rockchalk | K utilities=kutils
+	| R language=rlang
 	| shiny | shiny load test=shinyloadtest
+	| Shiny dashboard=shinydashboard
 	| here | Pac-Man=pacman | Micro benchmark=microbenchmark
 	| base | stats | You till=util
 	| CE API=ceapi | SM viz.=smvis | CPPR=cppr
